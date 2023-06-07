@@ -122,6 +122,25 @@ li.relative {
     font-size: 13px; /* Измените значение на желаемый размер */
 }
 
+.circle-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-image {
+    max-width: 100%;
+    max-height: 100%;
+}
 
 
 

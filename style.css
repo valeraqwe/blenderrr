@@ -1,0 +1,133 @@
+.circle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px; /* Размер кружка */
+    height: 100px; /* Размер кружка */
+    background-color: #000;
+    border-radius: 50%;
+    margin-bottom: 8px; /* Отступ между кружком и текстом */
+}
+
+.circle img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+li.relative {
+    position: relative;
+    margin-bottom: 20px; /* Отступ между элементами списка */
+}
+
+.cost-delivery-list {
+    display: flex;
+    justify-content: center;
+}
+
+.cost-delivery-list > div {
+    border: none;
+    box-shadow: none;
+    background-color: #FFFFFF;
+    border-radius: 8px 8px 0 0;
+    flex: 1;
+}
+
+.cost-delivery-list > div:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.cost-delivery-list > div:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+.wider-left {
+    margin-left: -20px;
+}
+
+.wider-right {
+    margin-right: -20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+.column {
+    flex: 50%;
+    max-width: 50%;
+    padding: 0 4px;
+}
+
+.column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+.list_4 {
+    font-size: 0;
+    letter-spacing: -1px;
+    margin-top: 30px;
+    padding: 0 10px 0;
+}
+
+.list_4 > li {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    letter-spacing: normal;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.list_4 > li h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.list_4 > li .text > p {
+    padding: 0 20px;
+}
+
+.list_4 > li .text > img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 25px; /* Добавлены закругления по углам */
+    padding: 10px;
+}
+
+.list_4 > li:last-child img {
+    display: block;
+}
+
+.sect_1 {
+    padding-bottom: 0;
+}
+
+
+.mb-2.text-gray-666 {
+    font-size: 13px; /* Измените значение на желаемый размер */
+}
+
+
+
+
+
+
+
+
+
+

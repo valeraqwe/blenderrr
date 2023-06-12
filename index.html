@@ -1,24 +1,3 @@
-<?php
-session_start();
-$period_cookie = 2592000; // 30 дней (2592000 секунд)
-
-if ($_GET) {
-    setcookie("utm_medium", $_GET['utm_medium'], time() + $period_cookie);
-    setcookie("utm_term", $_GET['utm_term'], time() + $period_cookie);
-    setcookie("utm_content", $_GET['utm_content'], time() + $period_cookie);
-    setcookie("utm_campaign", $_GET['utm_campaign'], time() + $period_cookie);
-    setcookie("act", $_GET["act"], time() + 60 * 60 * 24);
-}
-
-if (!isset($_SESSION['utms'])) {
-    $_SESSION['utms'] = array();
-    $_SESSION['utms']['utm_source'] = '';
-    $_SESSION['utms']['utm_medium'] = '';
-    $_SESSION['utms']['utm_term'] = '';
-    $_SESSION['utms']['utm_content'] = '';
-    $_SESSION['utms']['utm_campaign'] = '';
-}
-?>
 
 <!DOCTYPE html>
 <html lang="ua">
@@ -30,32 +9,6 @@ if (!isset($_SESSION['utms'])) {
     <link rel="stylesheet" href="spasibo.php">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.3.2/swiper-bundle.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        !function (f, b, e, v, n, t, s) {
-            n.callMethod = undefined;
-            if (f.fbq) return;
-            n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '<?=$_COOKIE["act"]?>');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" alt="img" width="1" style="display:none"
-                   src="https://www.facebook.com/tr?id=<?= $_COOKIE["act"] ?>&ev=PageView&noscript=1"
-        /></noscript>
 </head>
 <body>
 <div class="min-h-screen flex flex-col">
@@ -435,8 +388,8 @@ if (!isset($_SESSION['utms'])) {
         orderForm.addEventListener("submit", function (event) {
             event.preventDefault(); // Отменяем отправку формы по умолчанию
 
-            // Перенаправляем пользователя на страницу thanks.html
-            window.location.href = "spasibo.php";
+            // Перенаправляем пользователя на страницу spasibo.html
+            window.location.href = "spasibo.html";
         });
     });
 

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/blender.iml" filepath="$PROJECT_DIR$/.idea/blender.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../xit.berlingo.space/.idea/xit.berlingo.space.iml" filepath="$PROJECT_DIR$/../xit.berlingo.space/.idea/xit.berlingo.space.iml" />
     </modules>
   </component>
 </project>

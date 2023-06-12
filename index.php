@@ -1,3 +1,25 @@
+<?php
+session_start();
+$period_cookie = 2592000; // 30 дней (2592000 секунд)
+
+if ($_GET) {
+    setcookie("utm_medium", $_GET['utm_medium'], time() + $period_cookie);
+    setcookie("utm_term", $_GET['utm_term'], time() + $period_cookie);
+    setcookie("utm_content", $_GET['utm_content'], time() + $period_cookie);
+    setcookie("utm_campaign", $_GET['utm_campaign'], time() + $period_cookie);
+    setcookie("act", $_GET["act"], time() + 60 * 60 * 24);
+}
+
+if (!isset($_SESSION['utms'])) {
+    $_SESSION['utms'] = array();
+    $_SESSION['utms']['utm_source'] = '';
+    $_SESSION['utms']['utm_medium'] = '';
+    $_SESSION['utms']['utm_term'] = '';
+    $_SESSION['utms']['utm_content'] = '';
+    $_SESSION['utms']['utm_campaign'] = '';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ua">
 <head>
@@ -5,9 +27,35 @@
     <title>ФІРМОВИЙ НІМЕЦЬКИЙ РУЧНИЙ МІКСЕР</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="thanks.html">
+    <link rel="stylesheet" href="spasibo.php">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.3.2/swiper-bundle.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            n.callMethod = undefined;
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '<?=$_COOKIE["act"]?>');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" alt="img" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=<?= $_COOKIE["act"] ?>&ev=PageView&noscript=1"
+        /></noscript>
 </head>
 <body>
 <div class="min-h-screen flex flex-col">
@@ -42,66 +90,52 @@
         </div>
     </div>
 
-
     <!-- Форма для замовлення -->
     <div class="container mx-auto mt-6">
-        <form id="orderForm" class="max-w-4xl mx-auto">
-            <div class="mb-6 ml-8 mr-8">
-                <label for="name"></label>
-                <input class="appearance-none border rounded w-full py-6 px-8 text-gray-700 placeholder-black leading-tight focus:outline-none focus:shadow-outline"
-                       id="name" type="text" placeholder="Введіть ваше ім'я" required>
-            </div>
-            <div class="mb-0 ml-8 mr-8">
-                <label for="phone"></label>
-                <input class="appearance-none border rounded w-full py-6 px-8 text-gray-700 placeholder-black leading-tight focus:outline-none focus:shadow-outline"
-                       id="phone" type="tel" placeholder="Введіть номер телефону" required>
-            </div>
-            <div class="flex justify-center mt-8 ml-8 mr-8">
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-6 px-12 rounded focus:outline-none focus:shadow-outline w-full text-xl"
-                        type="submit">Зробити замовлення
+        <form class="order_form max-w-4xl mx-auto" action="spasibo.php" method="post">
+            <input type="hidden" name="task" value="process">
+            <input type="hidden" name="country" value="ru">
+            <input  style="width: 90%" class="field appearance-none ml-5 border rounded w-full sm:w-2/3 py-4 px-6 text-gray-700 placeholder-black leading-tight focus:outline-none focus:shadow-outline mb-4"
+                   type="text" name="name" placeholder="Введіть Ваше Ім'я" required="" >
+            <input style="width: 90%" class="field appearance-none border ml-5 rounded w-full sm:w-2/3 py-4 px-6 text-gray-700 placeholder-black leading-tight focus:outline-none focus:shadow-outline mb-4"
+                   type="tel" name="phone" placeholder="Введіть Ваш телефон"  required="" >
+            <div class="flex justify-center">
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-6 rounded focus:outline-none focus:shadow-outline w-full sm:w-auto" style="width: 80%">
+                    Замовити
                 </button>
-            </div>
-            <div class="flex justify-center items-center mb-2 mt-5">
-                <img src="images/klass.png" alt="Иконка" class="mr-2 h-7">
-                <p class="mb-2 text-gray-666">Якість підтверджено</p>
             </div>
         </form>
     </div>
 
-    <!-- Блок з причинами -->
-    <div class="container mx-auto px-4 py-8 text-center">
-        <h2 class="text-2xl font-bold mb-4">Чому вам варто замовити саме цей блендер?</h2>
-        <ul class="list-none pl-0">
-            <li class="relative">
-                <div class="circle-wrapper">
-                    <div class="circle">
-                        <img class="circle-image" src="images/perevaga.jpg" alt="Картинка"/>
-                    </div>
-                </div>
-                <br>
-                <span class="font-bold">Перевага точного та якісного подрібнення.</span><br>Наші блендери забезпечують неймовірну точність та швидке подрібнення будь-яких продуктів.
-            </li>
-            <li class="relative">
-                <div class="circle-wrapper">
-                    <div class="circle">
-                        <img class="circle-image" src="images/perevaga2.jpg" alt="Картинка"/>
-                    </div>
-                </div>
-                <br>
-                <span class="font-bold">Довговічність та міцність.</span><br>Виготовлені з високоякісних матеріалів, наші блендери стійкі до зношування і прослужать вам довгі роки.
-            </li>
-            <li class="relative">
-                <div class="circle-wrapper">
-                    <div class="circle">
-                        <img class="circle-image" src="images/sok5.png" alt="Картинка"/>
-                    </div>
-                </div>
-                <br>
-                <span class="font-bold">Зручність використання.</span><br>Наші блендери мають зручні ручки та оптимальну вагу, що робить їх комфортними для користування.
-            </li>
-        </ul>
-    </div>
+    <section class="facilities text-center">
+        <h1 class="font-bold text-2xl">Чому вам варто замовити саме цей блендер?</h1>
+        <br>
+        <div class="facility-circle">
+            <img src="images/krug1.jpg" alt="Facility Image">
+        </div>
+        <h1 class="font-bold">Перевага точного та якісного подрібнення.
+        </h1>
+        <p>Наші блендери забезпечують неймовірну точність та швидке подрібнення будь-яких продуктів.
+        </p>
+        <br>
+        <div class="facility-circle">
+            <img src="images/motor.jpg" alt="Facility Image">
+        </div>
+        <h1 class="font-bold">Довговічність та міцність.
+        </h1>
+        <p>Виготовлені з високоякісних матеріалів, наші блендери стійкі до зношування і прослужать вам довгі роки.
+        </p>
+        <br>
+        <div class="facility-circle">
+            <img src="images/krug3.jpg" alt="Facility Image">
+        </div>
+        <h1 class="font-bold">Зручність використання.
+        </h1>
+        <p>Наші блендери мають зручні ручки та оптимальну вагу, що робить їх комфортними для користування.
+        </p>
+    </section>
 
+    <!-- Блок з причинами -->
 
     <!-- Блок з характеристиками -->
     <div class="container mx-auto px-4 py-8">
@@ -118,34 +152,25 @@
             <li>Гарантія: 6 місяців</li>
         </ul>
     </div>
-
-    <section class="sect_1">
-        <ul class="list_4">
-            <li>
-                <div class="text">
-                    <img src="images/blender4.png" alt="product1">
-                </div>
-            </li>
-            <li>
-                <div class="text">
-                    <img src="images/part2.jpg" alt="product2">
-                </div>
-            </li>
-            <li>
-                <div class="text">
-                    <img src="images/part3.jpg" alt="product3">
-                </div>
-            </li>
-            <li>
-                <div class="text">
-                    <img src="images/part4.jpg" alt="product4">
-                </div>
-            </li>
-        </ul>
+    <section class="facilities1">
+        <div class="facility-square">
+            <img src="images/sok.png" alt="Facility Image">
+        </div>
+        <div class="facility-square">
+            <img src="images/motor.jpg" alt="Facility Image">
+        </div>
+        <div class="facility-square">
+            <img src="images/sok3.avif" alt="Facility Image">
+        </div>
+        <div class="facility-square">
+            <img src="images/krug3.jpg" alt="Facility Image">
+        </div>
     </section>
+
     <div class="flex justify-center mb-5 mt-8 ml-8 mr-8">
-        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-6 px-12 rounded focus:outline-none focus:shadow-outline w-full text-xl"
-                onclick="scrollToHeader()" type="button">Зробити замовлення
+        <button
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-6 px-12 rounded focus:outline-none focus:shadow-outline w-full text-xl"
+            onclick="scrollToHeader()" type="button">Зробити замовлення
         </button>
     </div>
 
@@ -167,10 +192,10 @@
     <div class="carousel relative overflow-hidden">
         <div class="carousel-inner flex transition-transform duration-500 ease-in-out">
             <div class="carousel-slide w-full flex-shrink-0">
-                <img src="images/blender2.png" alt="Photo 2" class="w-full h-auto rounded-lg">
+                <img src="images/blender3.png" alt="Photo 2" class="w-full h-auto rounded-lg">
             </div>
             <div class="carousel-slide w-full flex-shrink-0">
-                <img src="images/blender3.png" alt="Photo 3" class="w-full h-auto rounded-lg">
+                <img src="images/blender2.png" alt="Photo 3" class="w-full h-auto rounded-lg">
             </div>
             <div class="carousel-slide w-full flex-shrink-0">
                 <img src="images/blender4.png" alt="Photo 4" class="w-full h-auto rounded-lg">
@@ -179,11 +204,13 @@
                 <img src="images/blender5.png" alt="Photo 4" class="w-full h-auto rounded-lg">
             </div>
         </div>
-        <button class="carousel-prev absolute top-1/2 left-0 transform -translate-y-1/2 px-2 py-1 bg-gray-200 rounded-full shadow-md">
-            &lt;
+        <button
+            class="carousel-prev absolute top-1/2 left-0 transform -translate-y-1/2 px-2 py-1 rounded-full shadow-md">
+            ⬅️
         </button>
-        <button class="carousel-next absolute top-1/2 right-0 transform -translate-y-1/2 px-2 py-1 bg-gray-200 rounded-full shadow-md">
-            &gt;
+        <button
+            class="carousel-next absolute top-1/2 right-0 transform -translate-y-1/2 px-2 py-1 rounded-full shadow-md">
+            ➡️
         </button>
     </div>
 
@@ -303,8 +330,9 @@
     <div class="container mx-auto mt-6">
         <form class="max-w-4xl mx-auto">
             <div class="flex justify-center mb-5 mt-8 ml-8 mr-8">
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-6 px-12 rounded focus:outline-none focus:shadow-outline w-full text-xl"
-                        onclick="scrollToHeader()" type="button">Зробити замовлення
+                <button
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-6 px-12 rounded focus:outline-none focus:shadow-outline w-full text-xl"
+                    onclick="scrollToHeader()" type="button">Зробити замовлення
                 </button>
             </div>
 
@@ -408,7 +436,7 @@
             event.preventDefault(); // Отменяем отправку формы по умолчанию
 
             // Перенаправляем пользователя на страницу thanks.html
-            window.location.href = "thanks.html";
+            window.location.href = "spasibo.php";
         });
     });
 

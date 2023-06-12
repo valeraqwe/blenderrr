@@ -122,29 +122,93 @@ li.relative {
     font-size: 13px; /* Измените значение на желаемый размер */
 }
 
-.circle-wrapper {
-    display: flex;
-    justify-content: center;
+/* Стили для мобильной версии */
+@media (max-width: 767px) {
+    /* Ваши стили для мобильной версии здесь */
 }
 
-.circle {
+/* Стили для десктопной версии */
+@media (min-width: 768px) {
+    /* Ваши стили для десктопной версии здесь */
+}
+
+/* Стили для мобильной версии */
+@media (max-width: 767px) {
+    /* Ваши стили для мобильной версии здесь */
+}
+
+/* Стили для десктопной версии */
+@media (min-width: 768px) {
+    /* Ваши стили для десктопной версии здесь */
+}
+
+.facilities {
+    width: 80%;
+    margin: auto;
+    padding-top: 50px;
+}
+
+.facilities-col {
+    flex-basis: 31%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    text-align: left;
+}
+
+.facilities-col img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.facilities-col p {
+    padding: 0;
+}
+
+.facilities-col h3 {
+    margin-top: 16px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.facility-circle {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background-color: #e0e0e0;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.facility-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text-justify-center {
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.facilities1 {
     display: flex;
+    flex-wrap: wrap; /* Разрешить перенос элементов на новую строку */
     justify-content: center;
-    align-items: center;
 }
 
-.circle-image {
-    max-width: 100%;
-    max-height: 100%;
+.facility-square {
+    width: calc(50% - 20px); /* Изменение ширины элемента */
+    height: 200px;
+    margin: 10px;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-
-
-
+.facility-square img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 
 
